@@ -11,9 +11,11 @@ class Sort {
         void show_arr();
         void bubble_sort();
         void select_sort();
+        void insert_sort();
         //int * bubble_sort(int arr[],int len);
 };
 
+// 设置私有待排序数组
 void Sort::set_arr(int temp[],int len){
     int i = 0;
     for( i = 0; i < len; i ++) {
@@ -21,6 +23,8 @@ void Sort::set_arr(int temp[],int len){
     }
     this->current_length = len;
 }
+
+// 显示待排序数组
 void Sort::show_arr(){
     int i;
     cout << "show arr :" << endl;
@@ -30,6 +34,8 @@ void Sort::show_arr(){
     cout << endl;
 
 }
+
+// 冒泡排序
 void  Sort::bubble_sort() {
     cout << "the length of the array which is waiting for sort:" <<endl;
     cout << this->current_length << endl;
@@ -49,6 +55,7 @@ void  Sort::bubble_sort() {
     this->show_arr();
 }
 
+// 选择排序
 void  Sort::select_sort(){
     cout << "the length of the array which is waiting for bubble sort:" <<endl;
     cout << this->current_length << endl;
@@ -74,6 +81,34 @@ void  Sort::select_sort(){
     this->show_arr();
 }
 
+//插入排序
+
+void Sort::insert_sort(){
+    int len = this->current_length;
+    int temp[100] ;
+    int sorted_count = 0;
+
+    int i,j;
+    for( i = 0; i < len; i++) {
+        if(i == 0) {
+            temp[i] = this->a[i];
+            continue;
+        }
+        for(j = i -1; j>=0; j--) {
+            if(this->a[i] < temp[j]) {
+                temp[j+1] = temp[j];
+                continue;
+            } else {
+               break;
+            }
+        }
+        temp[j+1] = this->a[i];
+    }
+    cout << "insert sort:"<<endl;
+    for( i = 0; i < len; i++) {
+        this->a[i] = temp[i];
+    }
+}
 
 int main(int argc, char* argv[]){
     
@@ -83,6 +118,10 @@ int main(int argc, char* argv[]){
     bubble.bubble_sort();
     select.set_arr(temp,9);
     select.select_sort();
+
+    Sort insert;
+    insert.set_arr(temp,9);
+    insert.insert_sort();
 
     
     return 0;

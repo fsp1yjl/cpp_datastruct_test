@@ -14,6 +14,8 @@ class Sort {
         void insert_sort_stupid();
         void insert_sort();
         void shell_sort();
+        void merge_sort();
+        void merge_sort_recursive(int arr[], int reg[],int start ,int end);
         //int * bubble_sort(int arr[],int len);
 };
 
@@ -150,6 +152,41 @@ void Sort::shell_sort(){
     this->show_arr();
 }
 
+// 归并排序
+void Sort::merge_sort() {
+    int reg[100];
+    this->merge_sort_recursive(this->a,reg,0,this->current_length-1);
+    this->show_arr();
+}
+void Sort::merge_sort_recursive(int arr[],int reg[], int start ,int end){
+    if(start >= end) return;
+    int len = end - start;
+    int mid = (len >> 1) + start;
+    int start1 = start, end1 = mid;
+    int start2 = mid + 1, end2 = end;
+
+    this->merge_sort_recursive(arr,reg,start1,end1);
+    this->merge_sort_recursive(arr,reg,start2,end2);
+    int index = start;
+    for(; start1 <= end1 && start2 <= end2; ){ //维基百科上代码更减省
+        if(arr[start1] <= arr[start2]) {
+            reg[index++] = arr[start1++];
+        } else {
+            reg[index++] = arr[start2++];
+        }
+    }
+    while(start1 <= end1) {
+        reg[index++] = arr[start1++];
+    }
+    while(start2 <= end2) {
+        reg[index++] = arr[start2++];
+    }
+    for( index = start; index <= end; index++){
+        arr[index] = reg[index];
+    }
+}
+
+
 int main(int argc, char* argv[]){
     
     Sort bubble,select;
@@ -162,7 +199,8 @@ int main(int argc, char* argv[]){
     Sort insert;
     insert.set_arr(temp,9);
     //insert.insert_sort();
-    insert.shell_sort();
+    //insert.shell_sort();
+    insert.merge_sort();
 
     
     return 0;

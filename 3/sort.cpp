@@ -16,6 +16,8 @@ class Sort {
         void shell_sort();
         void merge_sort();
         void merge_sort_recursive(int arr[], int reg[],int start ,int end);
+        void quick_sort();
+        void quick_sort_recursive(int arr[], int start, int end);
         //int * bubble_sort(int arr[],int len);
 };
 
@@ -186,6 +188,36 @@ void Sort::merge_sort_recursive(int arr[],int reg[], int start ,int end){
     }
 }
 
+void Sort::quick_sort(){
+    this->quick_sort_recursive(this->a, 0, this->current_length-1);
+    this->show_arr();
+}
+
+void Sort::quick_sort_recursive(int arr[], int start ,int end) {
+    int mid = arr[end];
+    int i;
+    if(start >= end) return;
+    int left = start,right = end -1;
+    while(left < right) {
+        while(left < right && arr[left] < mid) {
+            left++;
+        }
+        while(right>left && arr[right]>= mid) {
+            right--;
+        }
+        std::swap(arr[left],arr[right]);
+    }
+    if(arr[left] >= mid) {
+        std::swap(arr[left],a[end]);
+    } else {
+        left++;
+    }
+
+    this->quick_sort_recursive(arr,start,left-1);
+    this->quick_sort_recursive(arr,left+1,end);
+    
+}
+
 
 int main(int argc, char* argv[]){
     
@@ -200,7 +232,8 @@ int main(int argc, char* argv[]){
     insert.set_arr(temp,9);
     //insert.insert_sort();
     //insert.shell_sort();
-    insert.merge_sort();
+    //insert.merge_sort();
+    insert.quick_sort();
 
     
     return 0;

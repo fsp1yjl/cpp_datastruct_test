@@ -1,4 +1,5 @@
 #include "stack.h"
+#include "node.h"
 #include <iostream>
 #include <stdlib.h>
 using namespace std;
@@ -24,6 +25,14 @@ ElementType pop(Stack s){
         free(s->next);
     }
     return temp;
+}
+
+ElementType top(Stack s) {
+    if(s->next) {
+        return s->next->element;
+    } else {
+        return 0;
+    }
 }
 
 void printStack(Stack s) {

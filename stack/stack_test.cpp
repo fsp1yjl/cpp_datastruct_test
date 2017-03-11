@@ -11,6 +11,7 @@ int main() {
     ElementType te = pop(s);
     printStack(s);
     cout << "te::" << te << endl;
+    cout<< "top:" << top(s) << endl;
 
     return 0;
 }

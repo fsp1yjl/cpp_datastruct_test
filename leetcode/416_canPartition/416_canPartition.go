@@ -60,6 +60,4 @@ func canPartition(nums []int) bool {
 	} else {
 		return false 
 	}
-
- 
 }

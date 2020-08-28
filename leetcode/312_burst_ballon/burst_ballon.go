@@ -35,6 +35,7 @@ func main() {
 	maxCoins(nums)
 }
 
+// 本题要和887扔鸡蛋一样，要用逆向思维去处理
 func maxCoins(nums []int) int {
 	n := len(nums)
 	if 0 == n {

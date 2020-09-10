@@ -83,3 +83,11 @@ func maxProfit(prices []int) int {
 
 	return profit
 }
+
+/*
+
+output:
+
+Runtime: 4 ms, faster than 96.19% of Go online submissions for Best Time to Buy and Sell Stock II.
+Memory Usage: 3.1 MB, less than 76.19% of Go online submissions for Best Time to Buy and Sell Stock II.
+*/

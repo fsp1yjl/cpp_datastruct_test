@@ -41,6 +41,10 @@ dpEmpty[i][k]表示0到i区间最多进行k次买入且最终空仓情况下的�
 
 
 
+如下按照思路2的实现， 提交结果：
+Runtime: 4 ms, faster than 77.65% of Go online submissions for Best Time to Buy and Sell Stock IV.
+Memory Usage: 5.4 MB, less than 17.65% of Go online submissions for Best Time to Buy and Sell Stock IV.
+
 */
 
 package main

@@ -38,6 +38,14 @@ func main() {
 
  注意去除重复解的方法
 
+运行结果：
+ Runtime: 12 ms, faster than 68.00% of Go online submissions for 4Sum.
+Memory Usage: 2.8 MB, less than 79.50% of Go online submissions for 4Sum.
+
+
+todo:
+利用这里的去除重复解的方法，重新解决3sum问题
+
 */
 func fourSum(nums []int, target int) [][]int {
 

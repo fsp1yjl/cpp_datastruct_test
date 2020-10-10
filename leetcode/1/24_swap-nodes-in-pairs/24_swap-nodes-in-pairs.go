@@ -70,9 +70,17 @@ type ListNode struct {
 
 /*
 
+tail1,tail2 双指针，每次移动两个距离
+1->2->3->4->5, 则tail1依次为1，3，5， tail2为2，4
+
+提交情况：
+Runtime: 0 ms, faster than 100.00% of Go online submissions for Swap Nodes in Pairs.
+Memory Usage: 2.1 MB, less than 74.26% of Go online submissions for Swap Nodes in Pairs.
+Next challenges:
+Reverse Nodes in k-Group
 
 
- */
+*/
 func swapPairs(head *ListNode) *ListNode {
 
 	if head == nil || head.Next == nil {

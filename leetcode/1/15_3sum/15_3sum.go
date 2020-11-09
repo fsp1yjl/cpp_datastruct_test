@@ -31,9 +31,10 @@ import (
 
 func main() {
 
-	nums := []int{-4,-2,-2,-2,0,1,2,2,2,3,3,4,4,6,6}
+	nums := []int{-4, -2, -2, -2, 0, 1, 2, 2, 2, 3, 3, 4, 4, 6, 6}
 	fmt.Println(threeSum(nums))
 }
+
 /*
 // 解法1: 思路，先对数组排序，依次确定左右值，查找中间值是否存在，同时注意删除重复对解
 // 提交结果显示运行效率很差
@@ -41,16 +42,15 @@ func main() {
 Runtime: 1148 ms, faster than 9.93% of Go online submissions for 3Sum.
 Memory Usage: 7 MB, less than 43.57% of Go online submissions for 3Sum.
 */
-func threeSum(nums []int) [][]int {
+func threeSum1(nums []int) [][]int {
 
 	res := [][]int{}
 	l := len(nums)
 	if l < 3 {
-		return res 
+		return res
 	}
 
 	// m := make(map[int]int)
-
 
 	//数组排序
 	sort.Slice(nums, func(i, j int) bool {
@@ -59,61 +59,57 @@ func threeSum(nums []int) [][]int {
 
 	// fmt.Println(nums)
 
-
-	right := l-1 
-	for right >=2 {
+	right := l - 1
+	for right >= 2 {
 		left := 0
-		for left < right  {
-			l := nums[left] // 代表最小值
+		for left < right {
+			l := nums[left]  // 代表最小值
 			r := nums[right] // 代表最大值
-	
-	
+
 			// 如果最左大于0，或者最右小于0，则不可能再有解，结束循环
-			if l>0 || r < 0 {
+			if l > 0 || r < 0 {
 				break
 
 			}
-	
-			sum := l +r 
-	
+
+			sum := l + r
+
 			target := 0 - sum
 			// fmt.Println("left, right:, target", l, r,target)
 
-			if target < l || target > r  {
+			if target < l || target > r {
 				left++
 				continue
 			}
-			
-			for i:= left+1; i< right; i++ {
+
+			for i := left + 1; i < right; i++ {
 				// fmt.Println("hello ", target, nums[i])
 				dupFlag := true
 
 				if nums[i] == target {
 					// fmt.Println("hello:num:", nums[i])
-					tmp:=[]int{l, target, r}
-				
+					tmp := []int{l, target, r}
+
 					if len(res) != 0 {
-						for k:=0; k < len(res); k++ {
+						for k := 0; k < len(res); k++ {
 							pre := res[k]
 
-							if pre[0]== l && pre[1] == target  { // 这里是为了防止解重复
+							if pre[0] == l && pre[1] == target { // 这里是为了防止解重复
 								dupFlag = false
 								break
 							}
 						}
-					
 
-						
 						// fmt.Println("pre:", pre)
 						// fmt.Println("tmp:", tmp)
 
-					} 
-					
+					}
+
 					if dupFlag {
 						res = append(res, tmp)
 
 					}
-					
+
 					break
 				}
 
@@ -121,13 +117,77 @@ func threeSum(nums []int) [][]int {
 					break
 				}
 			}
-	
+
 			left++
-	
+
 		}
 		right--
 	}
 
+	return res
+}
+
+/*
+优化后的算法提交结果：
+Runtime: 24 ms, faster than 99.75% of Go online submissions for 3Sum.
+Memory Usage: 6.7 MB, less than 5.34% of Go online submissions for 3Sum.
+
+*/
+func threeSum(nums []int) [][]int {
+
+	res := [][]int{}
+	l := len(nums)
+	if l < 3 {
+		return res
+	}
+
+	// m := make(map[int]int)
+
+	//数组排序
+	sort.Slice(nums, func(i, j int) bool {
+		return nums[i] < nums[j]
+	})
+
+	// fmt.Println(nums)
+
+	for i := 0; i < l-2; i++ {
+		if i > 0 && nums[i-1] == nums[i] {
+			//排除最左侧值重复的情况
+			continue
+		}
+		target := 0 - nums[i]
+
+		left := i + 1
+		right := l - 1
+		for left < right {
+			// fmt.Println("left:", left)
+			// fmt.Println("right:", right)
+
+			sum := nums[left] + nums[right]
+			if sum == target {
+				tmp := []int{nums[i], nums[left], nums[right]}
+
+				res = append(res, tmp)
+				//去除left,right的重复解
+				for left < right && nums[left+1] == nums[left] {
+					left++
+				}
+				for left < right && nums[right-1] == nums[right] {
+					right--
+				}
+
+				left++
+				right--
+			} else if sum < target {
+				//和小于target，则移动左侧
+				left++
+			} else {
+				//和大于target 则移动右侧
+				right--
+			}
+		}
+	}
 
 	return res
+
 }

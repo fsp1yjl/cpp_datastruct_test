@@ -39,7 +39,10 @@ package main
 import "fmt"
 
 func main() {
-	fmt.Println(superEggDrop(3, 14))
+	K:= 4
+	N:= 25
+	fmt.Println(superEggDrop(K, N))
+	fmt.Println(superEggDrop2(K, N))
 }
 
 func superEggDrop(K int, N int) int {
@@ -88,4 +91,56 @@ func superEggDrop(K int, N int) int {
 
 	return N
 
+}
+
+
+func superEggDrop2(K int , N int) int {
+	dp := make([][]int, K+1)
+	for i:=1; i<=K; i++ {
+		dp[i] = make([]int, N+1)
+	}
+	//只有一个鸡蛋，按楼高更新
+	for j:=1; j <=N; j++ {
+		dp[1][j] = j
+	}
+
+	//如果楼高为1， 则需要1次
+	for i:=1;i<=K;i++ {
+		dp[i][1] = 1
+	}
+	var helper  func(int,  int) int
+	helper = func(k int, n int) int {
+		if n == 0 {
+			return 0
+		}
+		if k > n {
+			return helper(n, n)
+		}
+		if dp[k][n] != 0 {
+			fmt.Println("HERE")
+			return dp[k][n]
+		}
+
+		min := n
+		for t:= 1; t<=n; t++{
+			// if drop egg broke, check lower floor
+			brokeCase := helper(k-1,t-1) + 1
+			// if not break, check upper floor
+			safeCase := helper(k, n-t) + 1
+
+			curMax := brokeCase
+			if safeCase > curMax {
+				curMax = safeCase
+			}
+
+			curRes := curMax
+			if curRes < min {
+				min = curRes
+			}
+		}
+
+		return min
+	}
+
+	return helper(K, N)
 }

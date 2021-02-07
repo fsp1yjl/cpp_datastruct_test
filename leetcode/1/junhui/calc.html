@@ -1,0 +1,30 @@
+<meta charset="utf-8"> 
+    <html>
+        <script>
+        function hh()
+        {
+            var order_id = document.getElementById("in").value;
+            var l = order_id.length
+            var sum = 0
+            for (i=0; i<l-5;i++) {
+                var cur = order_id[i] - 0
+                sum += cur
+
+            }
+            document.getElementById('out').value = sum;
+        }
+        </script>
+  <head>
+        <title></title>
+    </head>
+     <body>
+
+        <div style="text-align:center;margin-top: 100pt;" >
+            <p style="text-align: center; color:chocolate">订单自动去除后5位求和</p>
+            <input style="margin-top: 30pt; color:chocolate" type="text" placeholder="输入订单号" id="in"><br>
+            <button  style="margin-top: 30pt;color:chocolate"  onclick="hh()">开始计算</button>
+            <br>
+            结果:<input  style="margin-top: 30pt;color:chocolate" type ="text" id="out" disabled="disabled">
+        </div>
+    </body>
+    </html>

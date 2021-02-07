@@ -1,18 +1,14 @@
-package main
+package sort
 
-import (
-	"fmt"
-)
+//func test() {
+//	nums := []int {3, 5, 2, 19, 6, 9}
+//	fmt.Println(select_sort(nums))
+//	fmt.Println(bubble_sort(nums))
+//	fmt.Println(insert_sort(nums))
+//
+//}
 
-func main() {
-	nums := []int {3, 5, 2, 19, 6, 9}
-	fmt.Println(select_sort(nums))
-	fmt.Println(bubble_sort(nums))
-	fmt.Println(insert_sort(nums))
-
-}
-
-func select_sort(nums []int ) []int {
+func SelectSort(nums []int ) []int {
 
 	l := len(nums)
 
@@ -37,7 +33,7 @@ func select_sort(nums []int ) []int {
 }
 
 
-func bubble_sort(nums []int) []int {
+func BubbleSort(nums []int) []int {
 	l := len(nums)
 
 	for i:=0; i < l; i++ {
@@ -54,7 +50,7 @@ func bubble_sort(nums []int) []int {
 }
 
 
-func insert_sort(nums []int) []int {
+func InsertSort(nums []int) []int {
 	l := len(nums)
 
 	for i := 1; i < l; i++ {
